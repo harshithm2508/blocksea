@@ -4,7 +4,10 @@ import axios from "axios";
 function Navbar(){
 
     return(
-        <AboveNavbar/>
+        <div>
+            <AboveNavbar/>
+            <BelowNavbar/>
+        </div>
     )
 }
 
@@ -45,13 +48,12 @@ function AboveNavbar(){
     })
 
     return(
-        <div className=" text-white w-full bg-gray-950 h-12 border-b border-b-slate-700 flex items-center px-20">
+        <div className=" text-white w-full bg-gray-950 h-12 border-b border-b-slate-700 flex justify-between items-center px-20">
+                {/* //  Left Side contents of AboveNavbar */}
             <div>
-
-                {/* //  Left Side contents of Navbar */}
                 <div className=" font-extralight text-sm flex gap-2">
                     {/* //  Getting Ether price */}
-                    <div>
+                    <div className=" text-gray-300">
                         ETH Price : <span className=" text-blue-300">$ {ethPrice}</span>
                     </div>
 
@@ -64,13 +66,51 @@ function AboveNavbar(){
                         }
                     </div>
                 </div>
+            </div>
 
-                {/* //  Right Side contents of Navbar */}
-                <div className=" text-white">
-                    
+            {/* // Right Side contents of AboveNavbar */}
+            <div>
+                hell
+            </div>
+
+        </div>
+    )
+}
+
+
+function BelowNavbar() {
+    
+
+    return(
+        <div className=" text-white w-full bg-gray-950 h-14 border-b border-b-slate-700 flex justify-between items-center px-20">
+            {/* //  Left Side of Below Navbar  */}
+            <div className=" flex items-center gap-2">
+                <div>
+                    <img src="https://opensea.io/static/images/logos/opensea-logo.svg" width={40} height={40} alt="" />
+                </div>
+                <div className=" text-white font-semibold text-2xl">
+                    BlockSea
                 </div>
             </div>
-            <div></div>
+
+
+            {/* //  Right Side of Below Navbar  */}
+            <ul className=" flex gap-6 text-sm text-gray-300">
+                <li>Home</li>
+                <li>Blockchain</li>
+                <li>NFTs</li>
+                <li>Resources</li>
+                <li>Developers</li>
+
+
+                {/* // Avatar Sign In Part  */}
+                <li className=" flex items-center gap-2 px-2 border-l pl-3">
+                        <div className="relative w-6 h-6 overflow-hidden bg-gray-700 rounded-full">
+                            <svg className="absolute w-7 h-7 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+                        </div>
+                    <div className="">Sign In</div>
+                </li>
+            </ul>
         </div>
     )
 }

@@ -3,6 +3,14 @@ import { publicClient } from "../clients/publicClient";
 import { recentBlock } from "../state/atoms/BlockState";
 import { useEffect, useState } from "react";
 
+function SampleDashboard(){
+    return(
+        <div>
+
+        </div>
+    )
+}
+
 function Dashboard(){
     return(
         <div className=" grid grid-rows-3 h-[calc(100vh-5rem)]">
@@ -70,4 +78,4 @@ function Loader(){
     )
 }
 
-export default Dashboard;
+export default SampleDashboard;
