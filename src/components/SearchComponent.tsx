@@ -14,11 +14,23 @@ function SearchComponent(){
             setLoading(false)
             return alert("Please enter an address")
         }
-        const transactions = await publicClient.getTransactionCount({
-            address : `0x${address}`
-        })
-        setCount(transactions);
-        setLoading(false);
+
+        if(address.length !== 40){
+            setLoading(false)
+            return alert("Please enter a valid address")
+        }
+
+        try{
+            const transactions = await publicClient.getTransactionCount({
+                address : `0x${address}`
+            })
+            setCount(transactions);
+            setLoading(false);
+        }catch(e){
+            console.log("There was an error : ",e);
+            setLoading(false);
+            return alert("There was an error in fetching transactions.")
+        }
     }
 
 
@@ -37,7 +49,14 @@ function SearchComponent(){
                                 </svg>
                             </div>
                             <input onChange={e => setAddress(e.target.value)} type="search" id="default-search" className="block w-full p-4 ps-10 text-base text-gray-50 border border-gray-700 rounded-lg bg-black " placeholder="Enter address to check transaction count" required />
-                            <button onClick={getTransactionCount} type="button" className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 ">Search</button>
+                            <button
+                                onClick={getTransactionCount}
+                                type="button"
+                                className={`text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+                                disabled={loading}> 
+                                Search
+                            </button>
+
                         </div>
                     </form>
                 </div>
