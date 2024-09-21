@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { etherPrice } from "../state/atoms/BlockState";
 
 function Navbar(){
 
@@ -14,15 +16,10 @@ function Navbar(){
 
 export default Navbar;
 
-// const Button = ({text} : {text : string}) =>{
-//     return <button className=" rounded-lg px-4 py-2 bg-blue-700 text-white">{text}</button>
-// }
-
-
 
 function AboveNavbar(){
 
-    const [ ethPrice, setEthPrice] = useState(0);
+    const [ ethPrice, setEthPrice] = useRecoilState(etherPrice);
     const [ ethPriceChange, setEthPriceChange ] = useState(0);
 
     useEffect(()=>{
