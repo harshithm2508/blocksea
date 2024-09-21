@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { etherPrice } from "../state/atoms/BlockState";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { etherPrice, btcPrice } from "../state/atoms/BlockState";
 
 function Navbar(){
 
@@ -20,14 +20,15 @@ export default Navbar;
 function AboveNavbar(){
 
     const [ ethPrice, setEthPrice] = useRecoilState(etherPrice);
+    const setBtcPrice = useSetRecoilState(btcPrice);
     const [ ethPriceChange, setEthPriceChange ] = useState(0);
 
     useEffect(()=>{
         const getETHPrice = () => {
 
-    const options = {
+        const options = {
             method: 'GET',
-            url: 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=ethereum',
+            url: 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum&vs_currencies=usd&include_24hr_change=true',
             headers: {accept: 'application/json', 'x-cg-demo-api-key': 'CG-1Vws27H86UYSY5xqtW6KDZaE'}
         };
 
@@ -35,8 +36,9 @@ function AboveNavbar(){
         .request(options)
         .then(function (response : any) {
             console.log(response.data);
-            setEthPrice(response.data[0].current_price)
-            setEthPriceChange(Math.round(response.data[0].price_change_percentage_24h * 100) / 100)
+            setEthPrice(response.data.ethereum.usd)
+            setEthPriceChange(Math.round(response.data.ethereum.usd_24h_change * 100) / 100)
+            setBtcPrice(response.data.bitcoin.usd);
         })
         .catch(function (error : any) {
             console.error(error);

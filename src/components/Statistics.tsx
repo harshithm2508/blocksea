@@ -1,11 +1,12 @@
 import { useRecoilState, useRecoilValue } from "recoil";
-import { etherPrice, recentBlock } from "../state/atoms/BlockState";
+import { btcPrice, etherPrice, recentBlock } from "../state/atoms/BlockState";
 import { useEffect } from "react";
 import { publicClient } from "../clients/publicClient";
 
 function Statistics(){
 
     const ethPrice = useRecoilValue(etherPrice)
+    const bitcoinPrice = useRecoilValue(btcPrice);
     const [recentlyMinedBlock, setRecentlyMinedBlock ] = useRecoilState(recentBlock);
 
     useEffect(() => {
@@ -34,7 +35,11 @@ function Statistics(){
                     </div>
                     <div className=" flex flex-col text-gray-400">
                         <div className=" text-xs tracking-widest ">ETHER PRICE</div>
-                        <div className=" text-gray-50 ">{ethPrice}</div>
+                        <div className=" flex gap-2">
+                            <div className=" text-gray-50 ">{ethPrice}</div>
+                            <div>@</div>
+                            <div>{Math.round((ethPrice  / bitcoinPrice) * 100)  / 100 + "  BTC"}</div>
+                        </div>
                     </div>
                 </div>
 
